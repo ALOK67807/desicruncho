@@ -1,144 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Desi Cruncho - Authentic Indian Snacks</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .logo-svg { font-family: serif; font-weight: bold; }
-    .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
-    .modal-content { background-color: white; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 400px; text-align: center; }
-    .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
-    .close:hover { color: black; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desi Cruncho</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff8f0;
+            text-align: center;
+        }
+        header {
+            background-color: #ffcc00;
+            padding: 20px;
+        }
+        header img {
+            height: 80px;
+        }
+        h1 {
+            color: #b33a00;
+            margin: 20px 0;
+        }
+        .products {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 20px;
+        }
+        .product {
+            background-color: #fff4e0;
+            border-radius: 15px;
+            padding: 15px;
+            width: 250px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .product h2 {
+            color: #b33a00;
+            margin: 10px 0 5px 0;
+        }
+        .product p {
+            margin: 5px 0;
+            color: #444;
+        }
+        .order-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #b33a00;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .order-btn:hover {
+            background-color: #801f00;
+        }
+        footer {
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #ffcc00;
+            color: #4d2600;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        input, select {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
-<body class="bg-yellow-50 font-sans">
+<body>
+    <header>
+        <img src="https://raw.githubusercontent.com/ALOK67807/desicruncho/main/logo.png" alt="Desi Cruncho Logo">
+    </header>
 
-  <!-- Floating Logo (top-right corner) -->
-  <div class="fixed top-4 right-4 z-50">
-    <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/images/logo.png" 
-         alt="Desi Cruncho Logo" 
-         class="w-16 h-16 rounded-full shadow-lg border-2 border-orange-600">
-  </div>
+    <h1>Our Crispy Delights</h1>
 
-  <div class="container mx-auto px-4 py-8">
-    <!-- Logo in Center -->
-    <div class="text-center mb-8">
-      <svg width="300" height="100" viewBox="0 0 300 100" class="inline-block">
-        <defs>
-          <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#ff6b35"/>
-          </filter>
-        </defs>
-        <rect width="100%" height="100%" fill="#ffecd1"></rect>
-        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" 
-              class="logo-svg text-4xl fill-orange-600" filter="url(#shadow)">Desi Cruncho</text>
-      </svg>
-    </div>
-
-    <!-- Welcome -->
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-orange-600 mb-2">Welcome to Desi Cruncho</h1>
-      <p class="text-lg text-gray-700">Delicious Traditional Indian Snacks: Nimki and Thekua</p>
-    </div>
-
-    <!-- Our Products -->
-    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-      <h2 class="text-2xl font-semibold text-orange-600 mb-4 text-center">Our Products</h2>
-      <p class="text-center mb-4">Choose your favorite snack:</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <!-- Nimki -->
-        <div class="product-card border rounded-lg p-4 text-center">
-          <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/images/nimki.jpg" 
-               alt="Golden crispy Nimki" 
-               class="w-full h-48 object-cover rounded-md mx-auto mb-4" />
-          <input type="radio" id="nimki" name="product" value="Nimki - ₹300 (800 gm)" required>
-          <label for="nimki" class="text-lg font-medium block mb-2">Nimki - Crunchy Fried Goodness</label>
-          <p class="text-gray-600 mt-2">Weight: <span class="font-semibold">800 gm</span></p>
-          <p class="text-orange-600 font-bold">₹300</p>
+    <div class="products">
+        <div class="product">
+            <img src="https://raw.githubusercontent.com/ALOK67807/desicruncho/main/nimki.jpg" alt="Nimki">
+            <h2>Nimki</h2>
+            <p>Weight: 800gm</p>
+            <p>Price: ₹300</p>
+            <form onsubmit="submitOrder(event, 'Nimki')">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="text" name="phone" placeholder="Phone Number" required>
+                <input type="text" name="address" placeholder="Address" required>
+                <input type="hidden" name="product" value="Nimki">
+                <button type="submit" class="order-btn">Order Now</button>
+            </form>
         </div>
 
-        <!-- Thekua -->
-        <div class="product-card border rounded-lg p-4 text-center">
-          <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/images/thekua.jpg" 
-               alt="Sweet and delightful Thekua" 
-               class="w-full h-48 object-cover rounded-md mx-auto mb-4" />
-          <input type="radio" id="thekua" name="product" value="Thekua - ₹280 (800 gm)">
-          <label for="thekua" class="text-lg font-medium block mb-2">Thekua - Sweet and Delightful</label>
-          <p class="text-gray-600 mt-2">Weight: <span class="font-semibold">800 gm</span></p>
-          <p class="text-orange-600 font-bold">₹280</p>
+        <div class="product">
+            <img src="https://raw.githubusercontent.com/ALOK67807/desicruncho/main/thekua.jpg" alt="Thekua">
+            <h2>Thekua</h2>
+            <p>Weight: 800gm</p>
+            <p>Price: ₹280</p>
+            <form onsubmit="submitOrder(event, 'Thekua')">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="text" name="phone" placeholder="Phone Number" required>
+                <input type="text" name="address" placeholder="Address" required>
+                <input type="hidden" name="product" value="Thekua">
+                <button type="submit" class="order-btn">Order Now</button>
+            </form>
         </div>
-
-      </div>
     </div>
 
-    <!-- Order Form -->
-    <div class="bg-white rounded-lg shadow-lg p-6">
-      <h2 class="text-2xl font-semibold text-orange-600 mb-4 text-center">Place Your Order</h2>
-      <form id="orderForm" method="POST" action="action="https://script.google.com/macros/s/AKfycby51b2ujOzbCAFxadcjUbqLF0CS4Enes35Zx75H182QC-G2rpIZWyvPEh9vp3CmjOzp/exec">
-        <div class="mb-4">
-          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-          <input type="text" id="name" name="name" required 
-                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
-        </div>
-        <div class="mb-4">
-          <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-          <input type="tel" id="phone" name="phone" required 
-                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
-        </div>
-        <div class="mb-6">
-          <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Delivery Address</label>
-          <textarea id="address" name="address" rows="3" required 
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
-        </div>
-        <button type="submit" class="w-full bg-orange-600 text-white py-3 rounded-md font-semibold hover:bg-orange-700 transition duration-200">Place Order</button>
-      </form>
-    </div>
-  </div>
+    <footer>
+        &copy; 2025 Desi Cruncho. All Rights Reserved.
+    </footer>
 
-  <!-- Modal -->
-  <div id="thankYouModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2 class="text-2xl font-bold text-green-600 mb-4">Order Placed!</h2>
-      <p class="text-gray-700">Thank you for choosing Desi Cruncho. Your order has been placed successfully. We will contact you soon for delivery details.</p>
-    </div>
-  </div>
+    <script>
+        function submitOrder(event, productName) {
+            event.preventDefault();
+            const form = event.target;
+            const data = new URLSearchParams(new FormData(form));
 
-  <script>
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
-      e.preventDefault(); // Prevent default submission
-      
-      const name = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const address = document.getElementById('address').value.trim();
-      const product = document.querySelector('input[name="product"]:checked');
-      
-      if (!name || !phone || !address || !product) {
-        alert('Please fill all fields and select a product.');
-        return;
-      }
-
-      // Show modal
-      document.getElementById('thankYouModal').style.display = 'block';
-
-      // Submit form to Apps Script
-      setTimeout(() => {
-        this.submit();
-      }, 2000);
-    });
-
-    function closeModal() {
-      document.getElementById('thankYouModal').style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-      if (event.target == document.getElementById('thankYouModal')) {
-        closeModal();
-      }
-    };
-  </script>
+            fetch('https://script.google.com/macros/s/AKfycby51b2ujOzbCAFxadcjUbqLF0CS4Enes35Zx75H182QC-G2rpIZWyvPEh9vp3CmjOzp/exec', {
+                method: 'POST',
+                body: data
+            })
+            .then(response => response.text())
+            .then(text => {
+                alert('Order placed successfully for ' + productName + '!');
+                form.reset();
+            })
+            .catch(err => {
+                alert('Error! Please try again.');
+                console.error(err);
+            });
+        }
+    </script>
 </body>
 </html>
