@@ -14,7 +14,7 @@
     .hero p { font-size:20px; }
     .products { padding:40px 20px; text-align:center; }
     .products h2 { font-size:28px; margin-bottom:20px; }
-    .product { display:inline-block; border:1px solid #ddd; border-radius:8px; margin:10px; width:250px; background:#fafafa; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    .product { display:inline-block; border:1px solid #ddd; border-radius:8px; margin:10px; width:250px; background:#fafafa; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition:all 0.3s ease-in-out; }
     .product img { width:100%; border-radius:8px 8px 0 0; }
     .product h3 { margin:10px 0; }
     .product p { margin:5px 0; }
@@ -22,6 +22,13 @@
     .order-form input, .order-form textarea { width:100%; margin-bottom:10px; padding:10px; border:1px solid #ccc; border-radius:5px; }
     .order-form button { padding:10px 20px; background:#f39c12; color:#fff; border:none; border-radius:5px; cursor:pointer; }
     .order-form button:hover { background:#e67e22; }
+
+    /* Golden glow effect */
+    .product.selected {
+      box-shadow: 0 0 20px 5px gold;
+      border: 2px solid gold;
+      transform: scale(1.03);
+    }
   </style>
 </head>
 <body>
@@ -80,8 +87,14 @@
   const scriptURL = "https://script.google.com/macros/s/AKfycbxiL06sh4aa81BmNJ-zAEDfM6yCqwj5MWQiGTnI4YrTnY_KetVgZ3_NZRh2IxcUWsiG/exec";
   
   function showForm(product) {
+    // Hide all forms
     document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
+    // Remove golden glow
+    document.querySelectorAll(".product").forEach(p => p.classList.remove("selected"));
+    // Show selected form
     document.getElementById("form-" + product).style.display = "block";
+    // Add golden glow
+    document.getElementById("form-" + product).parentElement.classList.add("selected");
   }
 
   document.getElementById("orderFormThekua").addEventListener("submit", e => {
