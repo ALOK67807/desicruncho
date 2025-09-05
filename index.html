@@ -1,149 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desi Cruncho</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fff8f0;
-            text-align: center;
-        }
-        header {
-            background-color: #ffcc00;
-            padding: 20px;
-        }
-        header img {
-            height: 80px;
-        }
-        h1 {
-            color: #b33a00;
-            margin: 20px 0;
-        }
-        .products {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin: 20px;
-        }
-        .product {
-            background-color: #fff4e0;
-            border-radius: 15px;
-            padding: 15px;
-            width: 250px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .product img {
-            width: 100%;
-            border-radius: 10px;
-        }
-        .product h2 {
-            color: #b33a00;
-            margin: 10px 0 5px 0;
-        }
-        .product p {
-            margin: 5px 0;
-            color: #444;
-        }
-        .order-btn {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #b33a00;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            cursor: pointer;
-        }
-        .order-btn:hover {
-            background-color: #801f00;
-        }
-        footer {
-            margin-top: 40px;
-            padding: 15px;
-            background-color: #ffcc00;
-            color: #4d2600;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        input, select {
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desi Cruncho - Order Now</title>
+<style>
+body {font-family: Arial, sans-serif; margin:0; padding:0; background:#fff8f0; text-align:center;}
+header {background:#ff6600; padding:10px 20px; color:white; display:flex; align-items:center; justify-content:center;}
+header img {height:40px; margin-right:10px;}
+.hero {
+  background: url('https://github.com/ALOK67807/desicruncho/blob/main/hero-bg.jpg?raw=true') center/cover no-repeat;
+  color:white;
+  padding:100px 20px;
+  font-size:28px;
+  font-weight:bold;
+  text-shadow:2px 2px 6px rgba(0,0,0,0.6);
+}
+.container {max-width:1000px; margin:20px auto; background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1);}
+h2 {color:#d35400; margin-bottom:20px;}
+.products {display:flex; justify-content:center; gap:20px; margin-bottom:20px; flex-wrap:wrap;}
+.product-card {width:45%; background:#fff8f5; padding:15px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); cursor:pointer; transition:transform 0.2s; text-align:center;}
+.product-card:hover {transform:scale(1.05); border:2px solid #ff6600;}
+.product-card img {max-width:100%; border-radius:8px;}
+.product-info {margin-top:10px; font-size:16px; font-weight:bold; color:#333;}
+.form-section {text-align:left; margin-top:30px;}
+.form-section h3 {color:#d35400; margin-bottom:15px; border-bottom:2px solid #ff6600; display:inline-block; padding-bottom:5px;}
+label {font-weight:bold; margin:8px 0 5px; display:block;}
+input, textarea {width:100%; padding:12px; margin-bottom:20px; border:1px solid #ccc; border-radius:6px; font-size:16px;}
+.order-btn {position:relative; display:inline-block; padding:14px 30px; background:#27ae60; color:white; font-size:18px; font-weight:bold; border:none; border-radius:8px; cursor:pointer; overflow:hidden; transition:background 0.3s;}
+.order-btn:hover {background:#219150;}
+.order-btn .truck {width:40px; height:28px; position:absolute; top:50%; left:-50px; transform:translateY(-50%);}
+.order-btn.animate .truck {animation:truckMove 3s forwards, truckBounce 0.5s infinite alternate;}
+@keyframes truckMove {0% {left:-50px;} 100% {left:75%;}}
+@keyframes truckBounce {0% {transform:translateY(-50%) translateY(0px);} 100% {transform:translateY(-50%) translateY(-12px);}}
+.thankyou {display:none; font-size:18px; font-weight:bold; color:#27ae60; margin-top:20px;}
+</style>
 </head>
 <body>
-    <header>
-        <img src="https://raw.githubusercontent.com/ALOK67807/desicruncho/main/logo.png" alt="Desi Cruncho Logo">
-    </header>
-
-    <h1>Our Crispy Delights</h1>
-
-    <div class="products">
-        <div class="product">
-            <img src="https://raw.githubusercontent.com/ALOK67807/desicruncho/main/nimki.jpg" alt="Nimki">
-            <h2>Nimki</h2>
-            <p>Weight: 800gm</p>
-            <p>Price: ₹300</p>
-            <form onsubmit="submitOrder(event, 'Nimki')">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="text" name="phone" placeholder="Phone Number" required>
-                <input type="text" name="address" placeholder="Address" required>
-                <input type="hidden" name="product" value="Nimki">
-                <button type="submit" class="order-btn">Order Now</button>
-            </form>
-        </div>
-
-        <div class="product">
-            <img src="https://raw.githubusercontent.com/ALOK67807/desicruncho/main/thekua.jpg" alt="Thekua">
-            <h2>Thekua</h2>
-            <p>Weight: 800gm</p>
-            <p>Price: ₹280</p>
-            <form onsubmit="submitOrder(event, 'Thekua')">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="text" name="phone" placeholder="Phone Number" required>
-                <input type="text" name="address" placeholder="Address" required>
-                <input type="hidden" name="product" value="Thekua">
-                <button type="submit" class="order-btn">Order Now</button>
-            </form>
-        </div>
-    </div>
-
-    <footer>
-        &copy; 2025 Desi Cruncho. All Rights Reserved.
-    </footer>
-
-    <script>
-        function submitOrder(event, productName) {
-            event.preventDefault();
-            const form = event.target;
-            const data = new URLSearchParams(new FormData(form));
-
-            fetch('https://script.google.com/macros/s/AKfycby51b2ujOzbCAFxadcjUbqLF0CS4Enes35Zx75H182QC-G2rpIZWyvPEh9vp3CmjOzp/exec', {
-                method: 'POST',
-                body: data
-            })
-            .then(response => response.text())
-            .then(text => {
-                alert('Order placed successfully for ' + productName + '!');
-                form.reset();
-            })
-            .catch(err => {
-                alert('Error! Please try again.');
-                console.error(err);
-            });
-        }
-    </script>
+<header>
+<img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Desi Cruncho Logo">
+<span>Desi Cruncho</span>
+</header>
+<div class="hero">Welcome to Desi Cruncho<br>Enjoy the taste of tradition with our handmade snacks!</div>
+<div class="container">
+<h2>Our Products</h2>
+<form id="orderForm">
+<div class="products">
+<label class="product-card">
+<img src="https://github.com/ALOK67807/desicruncho/blob/main/thekua.jpg?raw=true" alt="Thekua">
+<div class="product-info">Thekua - 800gm - ₹280</div>
+<input type="radio" name="product" value="Thekua" required> Select Thekua
+</label>
+<label class="product-card">
+<img src="https://github.com/ALOK67807/desicruncho/blob/main/nimki.jpg?raw=true" alt="Nimki">
+<div class="product-info">Nimki - 800gm - ₹300</div>
+<input type="radio" name="product" value="Nimki" required> Select Nimki
+</label>
+</div>
+<div class="form-section">
+<h3>Delivery Address</h3>
+<label for="name">Full Name *</label>
+<input type="text" id="name" name="name" placeholder="Enter your full name" required>
+<label for="phone">Phone Number *</label>
+<input type="tel" id="phone" name="phone" placeholder="e.g. 9876543210" required>
+<label for="address">Complete Address *</label>
+<textarea id="address" name="address" rows="4" placeholder="House No, Street, City, Pincode" required></textarea>
+<button type="submit" class="order-btn" id="orderButton">Place Order <img src="https://cdn-icons-png.flaticon.com/512/743/743007.png" class="truck" alt="Truck"></button>
+</div>
+</form>
+<div class="thankyou" id="thankyouMessage">🎉 Order Placed ✅ Thank you! Your order has been placed successfully. Our team will contact you soon.</div>
+</div>
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbzEt6U0Ep1QE2wGPSEsETDN48qdaZvNAnzTMPLzn1bnx7xwmcvmYSyWe5aSyMZxhNej/exec";
+const orderForm = document.getElementById("orderForm");
+const orderButton = document.getElementById("orderButton");
+const thankyouMessage = document.getElementById("thankyouMessage");
+orderForm.addEventListener("submit", function(e){
+  e.preventDefault();
+  orderButton.classList.add("animate");
+  orderButton.disabled = true;
+  orderButton.innerHTML = `Processing... <img src='https://cdn-icons-png.flaticon.com/512/743/743007.png' class='truck' alt='Truck'>`;
+  const formData = new FormData(this);
+  fetch(scriptURL, {method:'POST', body: formData})
+  .then(response => response.text())
+  .then(data => {
+    setTimeout(()=>{
+      orderForm.style.display='none';
+      thankyouMessage.style.display='block';
+    }, 3000);
+  })
+  .catch(error=>{
+    alert('Error! Please try again.');
+    orderButton.disabled=false;
+    orderButton.innerText='Place Order';
+  });
+});
+</script>
 </body>
 </html>
