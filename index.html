@@ -1,108 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Desi Cruncho Order</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; }
-    .hero {
-      background: url('https://github.com/ALOK67807/desicruncho/blob/main/hero-bg.jpg?raw=true') no-repeat center center/cover;
-      height: 60vh; display: flex; justify-content: center; align-items: center; color: #fff;
-      text-align: center; flex-direction: column;
-    }
-    .hero img { width: 150px; margin-bottom: 20px; }
-    .hero h1 { font-size: 3em; margin:0; }
-    .section { padding: 40px 20px; max-width: 900px; margin: auto; background:#fff; margin-top: -50px; box-shadow:0 0 10px rgba(0,0,0,0.1); border-radius:10px; }
-    h2 { text-align:center; margin-bottom: 30px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desi Cruncho Order</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; }
+.hero {
+  background: url('https://github.com/ALOK67807/desicruncho/blob/main/hero-bg.jpg?raw=true') no-repeat center center/cover;
+  height: 60vh; display: flex; justify-content: center; align-items: center; color: #fff;
+  text-align: center; flex-direction: column;
+}
+.hero img { width: 150px; margin-bottom: 20px; }
+.hero h1 { font-size: 3em; margin:0; }
+.section { padding: 40px 20px; max-width: 900px; margin: auto; background:#fff; margin-top: -50px; box-shadow:0 0 10px rgba(0,0,0,0.1); border-radius:10px; }
+h2 { text-align:center; margin-bottom: 30px; }
 
-    .products { display: flex; justify-content: space-around; flex-wrap: wrap; gap:20px; margin-bottom:30px; }
-    .product-card { border:1px solid #ddd; border-radius:10px; padding:15px; text-align:center; width:200px; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:#fff; }
-    .product-card img { width: 100%; border-radius:10px; margin-bottom:10px; }
-    .product-card h3 { margin:5px 0; }
-    .product-card p { margin:3px 0; }
+.products { display: flex; justify-content: space-around; flex-wrap: wrap; gap:20px; margin-bottom:30px; }
+.product-card { border:1px solid #ddd; border-radius:10px; padding:15px; text-align:center; width:200px; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:#fff; cursor:pointer; transition:0.3s; }
+.product-card img { width: 100%; border-radius:10px; margin-bottom:10px; }
+.product-card h3 { margin:5px 0; }
+.product-card p { margin:3px 0; }
+.product-card.selected { border: 2px solid #f39c12; box-shadow:0 0 15px rgba(243,156,18,0.5); }
 
-    form { display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin:auto; }
-    input, select, button { padding:10px; font-size: 1em; border-radius:5px; border:1px solid #ccc; }
-    button { background:#f39c12; color:#fff; border:none; cursor:pointer; transition:0.3s; }
-    button:hover { background:#e67e22; }
-    #thankYou { display:none; margin-top: 20px; color: green; font-weight: bold; text-align:center; }
-  </style>
+form { display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin:auto; }
+input, button { padding:10px; font-size: 1em; border-radius:5px; border:1px solid #ccc; }
+button { background:#f39c12; color:#fff; border:none; cursor:pointer; transition:0.3s; }
+button:hover { background:#e67e22; }
+#thankYou { display:none; margin-top: 20px; color: green; font-weight: bold; text-align:center; }
+</style>
 </head>
 <body>
 
-  <div class="hero">
-    <img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Desi Cruncho Logo">
-    <h1>Desi Cruncho</h1>
-    <p>Crunchy, sweet, and full of traditional taste! 🍪</p>
-  </div>
+<div class="hero">
+  <img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Desi Cruncho Logo">
+  <h1>Desi Cruncho</h1>
+  <p>Crunchy, sweet, and full of traditional taste! 🍪</p>
+</div>
 
-  <div class="section">
-    <h2>Our Products</h2>
-    <div class="products">
-      <div class="product-card">
-        <img src="https://github.com/ALOK67807/desicruncho/blob/main/thekua.jpg?raw=true" alt="Thekua">
-        <h3>Thekua</h3>
-        <p>Weight: 800gm</p>
-        <p>Price: ₹280</p>
-      </div>
-      <div class="product-card">
-        <img src="https://github.com/ALOK67807/desicruncho/blob/main/nimki.jpg?raw=true" alt="Nimki">
-        <h3>Nimki</h3>
-        <p>Weight: 800gm</p>
-        <p>Price: ₹300</p>
-      </div>
+<div class="section">
+  <h2>Our Products</h2>
+  <div class="products">
+    <div class="product-card" data-product="Thekua - 800gm - ₹280">
+      <img src="https://github.com/ALOK67807/desicruncho/blob/main/thekua.jpg?raw=true" alt="Thekua">
+      <h3>Thekua</h3>
+      <p>Weight: 800gm</p>
+      <p>Price: ₹280</p>
     </div>
-
-    <h2>Place Your Order</h2>
-    <form id="orderForm">
-      <input type="text" name="name" placeholder="Name" required>
-      <input type="text" name="phone" placeholder="Phone" required>
-      <input type="text" name="address" placeholder="Address" required>
-
-      <select name="product" required>
-        <option value="">Select Product</option>
-        <option value="Thekua - 800gm - ₹280">Thekua - 800gm - ₹280</option>
-        <option value="Nimki - 800gm - ₹300">Nimki - 800gm - ₹300</option>
-      </select>
-
-      <button type="submit">Order Now</button>
-    </form>
-    <div id="thankYou">
-      Your order has been placed! Our team will contact you soon.
+    <div class="product-card" data-product="Nimki - 800gm - ₹300">
+      <img src="https://github.com/ALOK67807/desicruncho/blob/main/nimki.jpg?raw=true" alt="Nimki">
+      <h3>Nimki</h3>
+      <p>Weight: 800gm</p>
+      <p>Price: ₹300</p>
     </div>
   </div>
 
-  <script>
-    const form = document.getElementById('orderForm');
-    form.addEventListener('submit', async function(e){
-        e.preventDefault();
+  <h2>Place Your Order</h2>
+  <form id="orderForm">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="phone" placeholder="Phone" required>
+    <input type="text" name="address" placeholder="Address" required>
+    <!-- Hidden input for selected product -->
+    <input type="hidden" name="product" id="selectedProduct" required>
+    <button type="submit">Order Now</button>
+  </form>
+  <div id="thankYou">
+    Your order has been placed! Our team will contact you soon.
+  </div>
+</div>
 
-        const formData = new FormData(form);
-        const params = new URLSearchParams(formData);
+<script>
+const cards = document.querySelectorAll('.product-card');
+const selectedInput = document.getElementById('selectedProduct');
 
-        const webAppUrl = "https://script.google.com/macros/s/AKfycbyFoAUDZWNOofzIVFF2DxYalWe6UlbRtbziiXOZQupWBQbspd5IegmNAe0uTC4Yy492/exec";
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    // Remove selection from all
+    cards.forEach(c => c.classList.remove('selected'));
+    // Add selection to clicked card
+    card.classList.add('selected');
+    // Set hidden input value
+    selectedInput.value = card.getAttribute('data-product');
+  });
+});
 
-        try {
-            const response = await fetch(webAppUrl, {
-                method: 'POST',
-                body: params
-            });
+const form = document.getElementById('orderForm');
+form.addEventListener('submit', async function(e){
+    e.preventDefault();
 
-            const result = await response.json();
+    if(!selectedInput.value){
+      alert("Please select a product!");
+      return;
+    }
 
-            if(result.result === "success"){
-                document.getElementById('thankYou').style.display = 'block';
-                form.reset();
-            } else {
-                alert("Error! Please try again.");
-            }
-        } catch(err) {
+    const formData = new FormData(form);
+    const params = new URLSearchParams(formData);
+
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbyFoAUDZWNOofzIVFF2DxYalWe6UlbRtbziiXOZQupWBQbspd5IegmNAe0uTC4Yy492/exec";
+
+    try {
+        const response = await fetch(webAppUrl, {
+            method: 'POST',
+            body: params
+        });
+
+        const result = await response.json();
+
+        if(result.result === "success"){
+            document.getElementById('thankYou').style.display = 'block';
+            form.reset();
+            cards.forEach(c => c.classList.remove('selected'));
+        } else {
             alert("Error! Please try again.");
-            console.error(err);
         }
-    });
-  </script>
+    } catch(err) {
+        alert("Error! Please try again.");
+        console.error(err);
+    }
+});
+</script>
 
 </body>
 </html>
