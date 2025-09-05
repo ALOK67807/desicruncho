@@ -1,130 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desi Cruncho</title>
-<style>
-body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; }
-header { display:flex; justify-content:flex-end; align-items:center; padding:15px 30px; background:#fff; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-header img { width:60px; margin-right:10px;}
-header h1 { margin:0; font-size:1.5em; color:#f39c12; }
-
-.hero {
-  position: relative;
-  background: url('https://github.com/ALOK67807/desicruncho/blob/main/hero-bg.jpg?raw=true') no-repeat center center/cover;
-  height: 60vh; display: flex; justify-content: center; align-items: center; flex-direction: column; color: #fff; text-align: center;
-}
-.hero h2 { font-size: 2.5em; font-weight:bold; margin:0; text-shadow: 1px 1px 5px rgba(0,0,0,0.5);}
-.hero p { font-size:1.2em; margin-top:10px; text-shadow:1px 1px 5px rgba(0,0,0,0.5);}
-
-.section { padding: 40px 20px; max-width: 1000px; margin: auto; background:#fff; margin-top: -50px; box-shadow:0 0 10px rgba(0,0,0,0.1); border-radius:10px; }
-.section h2 { text-align:center; margin-bottom: 30px; }
-
-.products { display: flex; justify-content: space-around; flex-wrap: wrap; gap:20px; }
-.product-card { border:1px solid #ddd; border-radius:10px; padding:15px; text-align:center; width:220px; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:#fff; cursor:pointer; transition:0.3s; }
-.product-card img { width: 100%; border-radius:10px; margin-bottom:10px; }
-.product-card h3 { margin:5px 0; }
-.product-card p { margin:3px 0; }
-.product-card.selected { border: 2px solid #f39c12; box-shadow:0 0 15px rgba(243,156,18,0.5); }
-
-.delivery-form { display:none; flex-direction:column; gap:10px; margin-top:15px; }
-.delivery-form input, .delivery-form button { padding:10px; font-size:1em; border-radius:5px; border:1px solid #ccc; }
-.delivery-form button { background:#f39c12; color:#fff; border:none; cursor:pointer; transition:0.3s; }
-.delivery-form button:hover { background:#e67e22; }
-#thankYou { display:none; margin-top: 10px; color: green; font-weight: bold; text-align:center; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desi Cruncho</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:#f8f8f8; }
+    header img { height:60px; }
+    header h1 { margin:0; font-size:24px; }
+    .hero { background:url("https://github.com/ALOK67807/desicruncho/blob/main/hero-bg.jpg?raw=true") no-repeat center/cover; height:300px; display:flex; flex-direction:column; justify-content:center; align-items:center; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.7); }
+    .hero h2 { font-size:36px; margin:10px 0; font-weight:bold; }
+    .hero p { font-size:20px; }
+    .products { padding:40px 20px; text-align:center; }
+    .products h2 { font-size:28px; margin-bottom:20px; }
+    .product { display:inline-block; border:1px solid #ddd; border-radius:8px; margin:10px; width:250px; background:#fafafa; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    .product img { width:100%; border-radius:8px 8px 0 0; }
+    .product h3 { margin:10px 0; }
+    .product p { margin:5px 0; }
+    .order-form { display:none; margin-top:15px; text-align:left; padding:15px; background:#fff; border-radius:8px; border:1px solid #ddd; }
+    .order-form input, .order-form textarea { width:100%; margin-bottom:10px; padding:10px; border:1px solid #ccc; border-radius:5px; }
+    .order-form button { padding:10px 20px; background:#f39c12; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+    .order-form button:hover { background:#e67e22; }
+  </style>
 </head>
 <body>
 
 <header>
-  <img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo">
-  <h1>Desi Cruncho</h1>
+  <div>
+    <h1>Desi Cruncho</h1>
+  </div>
+  <div>
+    <img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo">
+  </div>
 </header>
 
-<div class="hero">
+<section class="hero">
   <h2>Welcome to Desi Cruncho</h2>
   <p>Crunchy, sweet, and full of traditional taste! 🍪</p>
-</div>
+</section>
 
-<div class="section">
+<section class="products">
   <h2>Our Products</h2>
-  <div class="products">
-    <div class="product-card" data-product="Thekua - 800gm - ₹280">
-      <img src="https://github.com/ALOK67807/desicruncho/blob/main/thekua.jpg?raw=true" alt="Thekua">
-      <h3>Thekua</h3>
-      <p>Weight: 800gm</p>
-      <p>Price: ₹280</p>
-      <form class="delivery-form">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="text" name="phone" placeholder="Phone" required>
-        <input type="text" name="address" placeholder="Delivery Address" required>
-        <input type="hidden" name="product">
-        <button type="submit">Order Now</button>
-        <div class="thankYou">Your order has been placed! Our team will contact you soon.</div>
-      </form>
-    </div>
-
-    <div class="product-card" data-product="Nimki - 800gm - ₹300">
-      <img src="https://github.com/ALOK67807/desicruncho/blob/main/nimki.jpg?raw=true" alt="Nimki">
-      <h3>Nimki</h3>
-      <p>Weight: 800gm</p>
-      <p>Price: ₹300</p>
-      <form class="delivery-form">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="text" name="phone" placeholder="Phone" required>
-        <input type="text" name="address" placeholder="Delivery Address" required>
-        <input type="hidden" name="product">
-        <button type="submit">Order Now</button>
-        <div class="thankYou">Your order has been placed! Our team will contact you soon.</div>
+  
+  <div class="product">
+    <img src="https://github.com/ALOK67807/desicruncho/blob/main/thekua.jpg?raw=true" alt="Thekua">
+    <h3>Thekua</h3>
+    <p>800 gm - ₹280</p>
+    <button onclick="showForm('Thekua')">Order Now</button>
+    <div class="order-form" id="form-Thekua">
+      <form id="orderFormThekua">
+        <input type="hidden" name="Product" value="Thekua">
+        <input type="text" name="Name" placeholder="Your Name" required>
+        <input type="tel" name="Phone" placeholder="Phone Number" required>
+        <textarea name="Address" placeholder="Delivery Address" required></textarea>
+        <button type="submit">Place Order</button>
       </form>
     </div>
   </div>
-</div>
+  
+  <div class="product">
+    <img src="https://github.com/ALOK67807/desicruncho/blob/main/nimki.jpg?raw=true" alt="Nimki">
+    <h3>Nimki</h3>
+    <p>800 gm - ₹300</p>
+    <button onclick="showForm('Nimki')">Order Now</button>
+    <div class="order-form" id="form-Nimki">
+      <form id="orderFormNimki">
+        <input type="hidden" name="Product" value="Nimki">
+        <input type="text" name="Name" placeholder="Your Name" required>
+        <input type="tel" name="Phone" placeholder="Phone Number" required>
+        <textarea name="Address" placeholder="Delivery Address" required></textarea>
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  </div>
+</section>
 
 <script>
-const webAppUrl = "https://script.google.com/macros/s/AKfycbyFoAUDZWNOofzIVFF2DxYalWe6UlbRtbziiXOZQupWBQbspd5IegmNAe0uTC4Yy492/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbyFoAUDZWNOofzIVFF2DxYalWe6UlbRtbziiXOZQupWBQbspd5IegmNAe0uTC4Yy492/exec";
+  
+  function showForm(product) {
+    document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
+    document.getElementById("form-" + product).style.display = "block";
+  }
 
-document.querySelectorAll('.product-card').forEach(card => {
-  const form = card.querySelector('.delivery-form');
-  const hiddenInput = form.querySelector('input[name="product"]');
-  const thankDiv = form.querySelector('.thankYou');
-
-  card.addEventListener('click', () => {
-    // Hide all forms
-    document.querySelectorAll('.delivery-form').forEach(f => f.style.display='none');
-    // Remove selection from all
-    document.querySelectorAll('.product-card').forEach(c=>c.classList.remove('selected'));
-    // Select current card
-    card.classList.add('selected');
-    // Set hidden input
-    hiddenInput.value = card.getAttribute('data-product');
-    // Show form under this card
-    form.style.display = 'flex';
-    thankDiv.style.display = 'none';
-  });
-
-  form.addEventListener('submit', async e=>{
+  document.getElementById("orderFormThekua").addEventListener("submit", e => {
     e.preventDefault();
-    const formData = new FormData(form);
-    const params = new URLSearchParams(formData);
-
-    try {
-      const response = await fetch(webAppUrl, { method:'POST', body: params });
-      const result = await response.json();
-      if(result.result==="success"){
-        thankDiv.style.display='block';
-        form.reset();
-        hiddenInput.value = card.getAttribute('data-product'); // keep product set
-      } else {
-        alert("Error! Please try again.");
-      }
-    } catch(err){
-      alert("Error! Please try again.");
-      console.error(err);
-    }
+    fetch(scriptURL, { method:"POST", body: new FormData(e.target)})
+    .then(() => window.location.href="thankyou.html")
+    .catch(err => alert("Error: " + err.message));
   });
-});
+
+  document.getElementById("orderFormNimki").addEventListener("submit", e => {
+    e.preventDefault();
+    fetch(scriptURL, { method:"POST", body: new FormData(e.target)})
+    .then(() => window.location.href="thankyou.html")
+    .catch(err => alert("Error: " + err.message));
+  });
 </script>
 
 </body>
