@@ -84,7 +84,7 @@
 </section>
 
 <script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycbxsZPGz9XDaCLHwKhwaqwXz_JkfBaGVpRaeYnZ8Sy4sR5f_1CiGQOdVfnj54uwemnc/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwl1q7iahNy4ipm5LrsjU4Twv74aOT5iz9vC-cvxQ68gu0uaghhZyFLwmRX2ZcFRG8f/exec";
   
   function showForm(product) {
     // Hide all forms
@@ -104,7 +104,7 @@
       method: "POST",
       body: formData
     })
-    .then(res => res.json()) // 👈 parse JSON response
+    .then(res => res.json()) // parse JSON response
     .then(() => window.location.href="thankyou.html")
     .catch(err => alert("Error: " + err.message));
   }
