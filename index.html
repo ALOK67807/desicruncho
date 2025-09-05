@@ -57,12 +57,17 @@ button:hover { background:#e67e22; }
 
   <h2>Place Your Order</h2>
   <form id="orderForm">
-    <input type="text" name="name" placeholder="Name" required>
-    <input type="text" name="phone" placeholder="Phone" required>
-    <input type="text" name="address" placeholder="Address" required>
     <!-- Hidden input for selected product -->
     <input type="hidden" name="product" id="selectedProduct" required>
-    <button type="submit">Order Now</button>
+
+    <!-- Delivery info initially hidden -->
+    <div id="deliveryInfo" style="display:none; flex-direction:column; gap:10px;">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="text" name="phone" placeholder="Phone" required>
+      <input type="text" name="address" placeholder="Delivery Address" required>
+    </div>
+
+    <button type="submit" id="orderButton" style="display:none;">Order Now</button>
   </form>
   <div id="thankYou">
     Your order has been placed! Our team will contact you soon.
@@ -72,6 +77,8 @@ button:hover { background:#e67e22; }
 <script>
 const cards = document.querySelectorAll('.product-card');
 const selectedInput = document.getElementById('selectedProduct');
+const deliveryInfo = document.getElementById('deliveryInfo');
+const orderButton = document.getElementById('orderButton');
 
 cards.forEach(card => {
   card.addEventListener('click', () => {
@@ -81,6 +88,10 @@ cards.forEach(card => {
     card.classList.add('selected');
     // Set hidden input value
     selectedInput.value = card.getAttribute('data-product');
+
+    // Show delivery info fields & submit button
+    deliveryInfo.style.display = 'flex';
+    orderButton.style.display = 'block';
   });
 });
 
@@ -109,6 +120,8 @@ form.addEventListener('submit', async function(e){
         if(result.result === "success"){
             document.getElementById('thankYou').style.display = 'block';
             form.reset();
+            deliveryInfo.style.display = 'none';
+            orderButton.style.display = 'none';
             cards.forEach(c => c.classList.remove('selected'));
         } else {
             alert("Error! Please try again.");
