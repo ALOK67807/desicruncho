@@ -84,7 +84,7 @@
 </section>
 
 <script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzeSuwe3BlkjrHrdmFutdr01nMfGr_Aa106Lf_XfBp3h0ukqCwFm8yPjoLur8cByDFr/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxsZPGz9XDaCLHwKhwaqwXz_JkfBaGVpRaeYnZ8Sy4sR5f_1CiGQOdVfnj54uwemnc/exec";
   
   function showForm(product) {
     // Hide all forms
@@ -102,9 +102,9 @@
 
     fetch(scriptURL, {
       method: "POST",
-      mode: "no-cors", // CORS error avoid
       body: formData
     })
+    .then(res => res.json()) // 👈 parse JSON response
     .then(() => window.location.href="thankyou.html")
     .catch(err => alert("Error: " + err.message));
   }
