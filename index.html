@@ -84,7 +84,7 @@
 </section>
 
 <script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycbxiL06sh4aa81BmNJ-zAEDfM6yCqwj5MWQiGTnI4YrTnY_KetVgZ3_NZRh2IxcUWsiG/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzeSuwe3BlkjrHrdmFutdr01nMfGr_Aa106Lf_XfBp3h0ukqCwFm8yPjoLur8cByDFr/exec";
   
   function showForm(product) {
     // Hide all forms
@@ -97,18 +97,26 @@
     document.getElementById("form-" + product).parentElement.classList.add("selected");
   }
 
-  document.getElementById("orderFormThekua").addEventListener("submit", e => {
-    e.preventDefault();
-    fetch(scriptURL, { method:"POST", body: new FormData(e.target)})
+  function submitOrder(form) {
+    const formData = new FormData(form);
+
+    fetch(scriptURL, {
+      method: "POST",
+      mode: "no-cors", // CORS error avoid
+      body: formData
+    })
     .then(() => window.location.href="thankyou.html")
     .catch(err => alert("Error: " + err.message));
+  }
+
+  document.getElementById("orderFormThekua").addEventListener("submit", e => {
+    e.preventDefault();
+    submitOrder(e.target);
   });
 
   document.getElementById("orderFormNimki").addEventListener("submit", e => {
     e.preventDefault();
-    fetch(scriptURL, { method:"POST", body: new FormData(e.target)})
-    .then(() => window.location.href="thankyou.html")
-    .catch(err => alert("Error: " + err.message));
+    submitOrder(e.target);
   });
 </script>
 
