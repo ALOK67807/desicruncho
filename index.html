@@ -6,12 +6,19 @@
   <title>Desi Cruncho</title>
   <style>
     body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; }
-    header { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:#f8f8f8; }
-    header img { height:60px; }
-    header h1 { margin:0; font-size:24px; }
-    .hero { background:url("https://github.com/ALOK67807/desicruncho/blob/main/hero-bg.jpg?raw=true") no-repeat center/cover; height:300px; display:flex; flex-direction:column; justify-content:center; align-items:center; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.7); }
+    
+    /* Header */
+    header { display:flex; align-items:center; padding:15px 30px; background:#f8f8f8; }
+    header .logo-container { display:flex; align-items:center; }
+    header .logo-container img { width:60px; height:60px; border-radius:50%; object-fit:cover; margin-right:15px; }
+    header .logo-container h1 { margin:0; font-size:28px; color:#f39c12; font-weight:bold; }
+
+    /* Hero section */
+    .hero { background:url("https://res.cloudinary.com/demo/image/fetch/f_auto,q_auto/https://github.com/ALOK67807/desicruncho/blob/main/hero-bg.jpg?raw=true") no-repeat center/cover; height:300px; display:flex; flex-direction:column; justify-content:center; align-items:center; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.7); }
     .hero h2 { font-size:36px; margin:10px 0; font-weight:bold; }
     .hero p { font-size:20px; }
+
+    /* Products */
     .products { padding:40px 20px; text-align:center; }
     .products h2 { font-size:28px; margin-bottom:20px; }
     .product { display:inline-block; border:1px solid #ddd; border-radius:8px; margin:10px; width:250px; background:#fafafa; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition:all 0.3s ease-in-out; vertical-align: top; }
@@ -26,21 +33,27 @@
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <div><h1>Desi Cruncho</h1></div>
-    <div><img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo"></div>
+    <div class="logo-container">
+      <img src="https://res.cloudinary.com/demo/image/fetch/f_auto,q_auto/https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo" loading="lazy">
+      <h1>Desi Cruncho</h1>
+    </div>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
     <h2>Welcome to Desi Cruncho</h2>
     <p>Crunchy, sweet, and full of traditional taste! 🍪</p>
   </section>
 
+  <!-- Products Section -->
   <section class="products">
     <h2>Our Products</h2>
 
+    <!-- Thekua -->
     <div class="product">
-      <img src="https://github.com/ALOK67807/desicruncho/blob/main/thekua.jpg?raw=true" alt="Thekua">
+      <img src="https://res.cloudinary.com/demo/image/fetch/f_auto,q_auto/https://github.com/ALOK67807/desicruncho/blob/main/thekua.jpg?raw=true" alt="Thekua" loading="lazy">
       <h3>Thekua</h3>
       <p>800 gm - ₹280</p>
       <button onclick="showForm('Thekua')">Order Now</button>
@@ -55,8 +68,9 @@
       </div>
     </div>
 
+    <!-- Nimki -->
     <div class="product">
-      <img src="https://github.com/ALOK67807/desicruncho/blob/main/nimki.jpg?raw=true" alt="Nimki">
+      <img src="https://res.cloudinary.com/demo/image/fetch/f_auto,q_auto/https://github.com/ALOK67807/desicruncho/blob/main/nimki.jpg?raw=true" alt="Nimki" loading="lazy">
       <h3>Nimki</h3>
       <p>800 gm - ₹300</p>
       <button onclick="showForm('Nimki')">Order Now</button>
@@ -85,7 +99,6 @@
 
     function submitOrder(form) {
       const formData = new FormData(form);
-
       fetch(scriptURL, { method: "POST", body: formData })
         .then(res => res.json())
         .then(data => {
