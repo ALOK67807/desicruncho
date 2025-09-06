@@ -2,116 +2,155 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Desi Cruncho</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desi Cruncho - Order Now</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; }
-    header { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:#f8f8f8; }
-    header img { height:60px; }
-    header h1 { margin:0; font-size:24px; }
-    .hero { background:url("https://github.com/ALOK67807/desicruncho/blob/main/hero-bg.jpg?raw=true") no-repeat center/cover; height:300px; display:flex; flex-direction:column; justify-content:center; align-items:center; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.7); }
-    .hero h2 { font-size:36px; margin:10px 0; font-weight:bold; }
-    .hero p { font-size:20px; }
-    .products { padding:40px 20px; text-align:center; }
-    .products h2 { font-size:28px; margin-bottom:20px; }
-    .product { display:inline-block; border:1px solid #ddd; border-radius:8px; margin:10px; width:250px; background:#fafafa; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition:all 0.3s ease-in-out; vertical-align: top; }
-    .product img { width:100%; border-radius:8px 8px 0 0; }
-    .product h3 { margin:10px 0; }
-    .product p { margin:5px 0; }
-    .order-form { display:none; margin-top:15px; text-align:left; padding:15px; background:#fff; border-radius:8px; border:1px solid #ddd; }
-    .order-form input, .order-form textarea { width:100%; margin-bottom:10px; padding:10px; border:1px solid #ccc; border-radius:5px; }
-    .order-form button { padding:10px 20px; background:#f39c12; color:#fff; border:none; border-radius:5px; cursor:pointer; }
-    .order-form button:hover { background:#e67e22; }
-    .product.selected {
-      box-shadow: 0 0 20px 5px gold;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #fff8f0;
+      text-align: center;
+    }
+    header {
+      background: #ff8800;
+      color: white;
+      padding: 15px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .products {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px;
+    }
+    .product {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      width: 250px;
+      cursor: pointer;
+      transition: 0.3s;
+      background: #fff;
+    }
+    .product:hover {
+      border-color: #ff8800;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .selected {
       border: 2px solid gold;
-      transform: scale(1.03);
+      box-shadow: 0 0 15px gold;
+    }
+    form {
+      margin-top: 15px;
+      display: none;
+      text-align: left;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      background: #ff8800;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #e07000;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div><h1>Desi Cruncho</h1></div>
-  <div><img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo"></div>
-</header>
+  <header>🥨 Welcome to Desi Cruncho – Order Now</header>
 
-<section class="hero">
-  <h2>Welcome to Desi Cruncho</h2>
-  <p>Crunchy, sweet, and full of traditional taste! 🍪</p>
-</section>
+  <div class="products">
+    <!-- Thekua -->
+    <div class="product" onclick="showForm('Thekua')">
+      <h2>🍪 Thekua</h2>
+      <p>Sweet, crunchy, and traditional taste.</p>
+      <form id="form-Thekua" class="order-form">
+        <input type="hidden" name="Product name" value="Thekua">
+        <input type="text" name="Customer name" placeholder="Your Name" required>
+        <input type="text" name="Phone number" placeholder="Phone Number" required>
+        <textarea name="Delivery address" placeholder="Delivery Address" required></textarea>
+        <button type="submit">Order Thekua</button>
+      </form>
+    </div>
 
-<section class="products">
-  <h2>Our Products</h2>
-
-  <div class="product">
-    <img src="https://github.com/ALOK67807/desicruncho/blob/main/thekua.jpg?raw=true" alt="Thekua">
-    <h3>Thekua</h3>
-    <p>800 gm - ₹280</p>
-    <button onclick="showForm('Thekua')">Order Now</button>
-    <div class="order-form" id="form-Thekua">
-      <form id="orderFormThekua">
-        <input type="hidden" name="Product" value="Thekua">
-        <input type="text" name="Name" placeholder="Your Name" required>
-        <input type="tel" name="Phone" placeholder="Phone Number" required>
-        <textarea name="Address" placeholder="Delivery Address" required></textarea>
-        <button type="submit">Place Order</button>
+    <!-- Nimki -->
+    <div class="product" onclick="showForm('Nimki')">
+      <h2>🥟 Nimki</h2>
+      <p>Salty, crispy, and full of flavor.</p>
+      <form id="form-Nimki" class="order-form">
+        <input type="hidden" name="Product name" value="Nimki">
+        <input type="text" name="Customer name" placeholder="Your Name" required>
+        <input type="text" name="Phone number" placeholder="Phone Number" required>
+        <textarea name="Delivery address" placeholder="Delivery Address" required></textarea>
+        <button type="submit">Order Nimki</button>
       </form>
     </div>
   </div>
 
-  <div class="product">
-    <img src="https://github.com/ALOK67807/desicruncho/blob/main/nimki.jpg?raw=true" alt="Nimki">
-    <h3>Nimki</h3>
-    <p>800 gm - ₹300</p>
-    <button onclick="showForm('Nimki')">Order Now</button>
-    <div class="order-form" id="form-Nimki">
-      <form id="orderFormNimki">
-        <input type="hidden" name="Product" value="Nimki">
-        <input type="text" name="Name" placeholder="Your Name" required>
-        <input type="tel" name="Phone" placeholder="Phone Number" required>
-        <textarea name="Address" placeholder="Delivery Address" required></textarea>
-        <button type="submit">Place Order</button>
-      </form>
-    </div>
-  </div>
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwoT8JsMF3BUrNAaujnhgCT2pnQnUwpXokOX93ZcWQZEVOZ79nt9LPhKKiDWD0m9yhi7w/exec";
+    
+    function showForm(product) {
+      document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
+      document.querySelectorAll(".product").forEach(p => p.classList.remove("selected"));
+      document.getElementById("form-" + product).style.display = "block";
+      document.getElementById("form-" + product).parentElement.classList.add("selected");
+    }
 
-</section>
+    function submitOrder(form) {
+      const formData = new FormData(form);
+      const plainData = Object.fromEntries(formData.entries());
 
-<script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycbw0GrhJuyywVlQxkoTz0tMw7TGXDsiNLj5Ds5PtXWT_rdU2jPRO1aU9rSVvG97b4_yhDA/exec";
+      // 🔹 Debug log
+      console.log("🚀 Sending data to Google Sheets:", plainData);
 
-  function showForm(product) {
-    document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
-    document.querySelectorAll(".product").forEach(p => p.classList.remove("selected"));
-    document.getElementById("form-" + product).style.display = "block";
-    document.getElementById("form-" + product).parentElement.classList.add("selected");
-  }
-
-  function submitOrder(form) {
-    const formData = new FormData(form);
-    fetch(scriptURL, { method: "POST", body: formData })
-      .then(res => res.json())
-      .then(res => {
-        if (res.status === "success") {
-          window.location.href = "thankyou.html";
-        } else {
-          alert("Oops! Something went wrong: " + (res.message || "Unknown error"));
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(plainData)
+      })
+      .then(res => res.text())
+      .then(text => {
+        console.log("✅ Raw response from Google Script:", text);
+        try {
+          const json = JSON.parse(text);
+          if (json.status === "success") {
+            alert("🎉 Order placed successfully!");
+            window.location.href = "thankyou.html";
+          } else {
+            alert("⚠️ Error: " + json.message);
+          }
+        } catch (err) {
+          console.error("❌ Failed to parse response:", err);
+          alert("Something went wrong, check console.");
         }
       })
-      .catch(err => alert("Error: " + err.message));
-  }
+      .catch(err => {
+        console.error("❌ Network/Fetch error:", err);
+        alert("Error: " + err.message);
+      });
+    }
 
-  document.getElementById("orderFormThekua").addEventListener("submit", e => {
-    e.preventDefault();
-    submitOrder(e.target);
-  });
+    document.getElementById("form-Thekua").addEventListener("submit", e => {
+      e.preventDefault();
+      submitOrder(e.target);
+    });
 
-  document.getElementById("orderFormNimki").addEventListener("submit", e => {
-    e.preventDefault();
-    submitOrder(e.target);
-  });
-</script>
+    document.getElementById("form-Nimki").addEventListener("submit", e => {
+      e.preventDefault();
+      submitOrder(e.target);
+    });
+  </script>
 
 </body>
 </html>
