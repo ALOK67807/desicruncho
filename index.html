@@ -22,10 +22,7 @@
     .order-form input, .order-form textarea { width:100%; margin-bottom:10px; padding:10px; border:1px solid #ccc; border-radius:5px; }
     .order-form button { padding:10px 20px; background:#f39c12; color:#fff; border:none; border-radius:5px; cursor:pointer; }
     .order-form button:hover { background:#e67e22; }
-    /* Golden glow effect */
     .product.selected { box-shadow: 0 0 20px 5px gold; border: 2px solid gold; transform: scale(1.03); }
-    /* Thank you message */
-    .thank-you { display:none; margin-top:20px; padding:20px; background:#d1fae5; border-radius:8px; color:#065f46; text-align:center; font-size:18px; font-weight:bold; }
   </style>
 </head>
 <body>
@@ -55,9 +52,6 @@
           <textarea name="Address" placeholder="Delivery Address" required></textarea>
           <button type="submit">Place Order</button>
         </form>
-        <div class="thank-you" id="thankYouThekua">
-          🎉 Your order has been placed! Our team will contact you soon.
-        </div>
       </div>
     </div>
 
@@ -74,9 +68,6 @@
           <textarea name="Address" placeholder="Delivery Address" required></textarea>
           <button type="submit">Place Order</button>
         </form>
-        <div class="thank-you" id="thankYouNimki">
-          🎉 Your order has been placed! Our team will contact you soon.
-        </div>
       </div>
     </div>
 
@@ -92,17 +83,14 @@
       document.getElementById("form-" + product).parentElement.classList.add("selected");
     }
 
-    function submitOrder(form, thankYouId) {
+    function submitOrder(form) {
       const formData = new FormData(form);
-      const thankYouEl = document.getElementById(thankYouId);
 
-      // Send data to Google Sheet
       fetch(scriptURL, { method: "POST", body: formData })
         .then(res => res.json())
         .then(data => {
           if(data.status === "success") {
-            form.style.display = "none";
-            thankYouEl.style.display = "block";
+            window.location.href = "thankyou.html";
           } else {
             alert("Error: " + data.message);
           }
@@ -112,12 +100,12 @@
 
     document.getElementById("orderFormThekua").addEventListener("submit", e => {
       e.preventDefault();
-      submitOrder(e.target, "thankYouThekua");
+      submitOrder(e.target);
     });
 
     document.getElementById("orderFormNimki").addEventListener("submit", e => {
       e.preventDefault();
-      submitOrder(e.target, "thankYouNimki");
+      submitOrder(e.target);
     });
   </script>
 </body>
