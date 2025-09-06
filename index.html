@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Desi Cruncho</title>
   <style>
     body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; }
@@ -14,7 +14,7 @@
     .hero p { font-size:20px; }
     .products { padding:40px 20px; text-align:center; }
     .products h2 { font-size:28px; margin-bottom:20px; }
-    .product { display:inline-block; border:1px solid #ddd; border-radius:8px; margin:10px; width:250px; background:#fafafa; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition:all 0.3s ease-in-out; }
+    .product { display:inline-block; border:1px solid #ddd; border-radius:8px; margin:10px; width:250px; background:#fafafa; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition:all 0.3s ease-in-out; vertical-align: top; }
     .product img { width:100%; border-radius:8px 8px 0 0; }
     .product h3 { margin:10px 0; }
     .product p { margin:5px 0; }
@@ -22,8 +22,6 @@
     .order-form input, .order-form textarea { width:100%; margin-bottom:10px; padding:10px; border:1px solid #ccc; border-radius:5px; }
     .order-form button { padding:10px 20px; background:#f39c12; color:#fff; border:none; border-radius:5px; cursor:pointer; }
     .order-form button:hover { background:#e67e22; }
-
-    /* Golden glow effect */
     .product.selected {
       box-shadow: 0 0 20px 5px gold;
       border: 2px solid gold;
@@ -34,12 +32,8 @@
 <body>
 
 <header>
-  <div>
-    <h1>Desi Cruncho</h1>
-  </div>
-  <div>
-    <img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo">
-  </div>
+  <div><h1>Desi Cruncho</h1></div>
+  <div><img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo"></div>
 </header>
 
 <section class="hero">
@@ -49,7 +43,7 @@
 
 <section class="products">
   <h2>Our Products</h2>
-  
+
   <div class="product">
     <img src="https://github.com/ALOK67807/desicruncho/blob/main/thekua.jpg?raw=true" alt="Thekua">
     <h3>Thekua</h3>
@@ -65,7 +59,7 @@
       </form>
     </div>
   </div>
-  
+
   <div class="product">
     <img src="https://github.com/ALOK67807/desicruncho/blob/main/nimki.jpg?raw=true" alt="Nimki">
     <h3>Nimki</h3>
@@ -81,32 +75,31 @@
       </form>
     </div>
   </div>
+
 </section>
 
 <script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwl1q7iahNy4ipm5LrsjU4Twv74aOT5iz9vC-cvxQ68gu0uaghhZyFLwmRX2ZcFRG8f/exec";
-  
+  const scriptURL = "https://script.google.com/macros/s/AKfycbw0GrhJuyywVlQxkoTz0tMw7TGXDsiNLj5Ds5PtXWT_rdU2jPRO1aU9rSVvG97b4_yhDA/exec";
+
   function showForm(product) {
-    // Hide all forms
     document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
-    // Remove golden glow
     document.querySelectorAll(".product").forEach(p => p.classList.remove("selected"));
-    // Show selected form
     document.getElementById("form-" + product).style.display = "block";
-    // Add golden glow
     document.getElementById("form-" + product).parentElement.classList.add("selected");
   }
 
   function submitOrder(form) {
     const formData = new FormData(form);
-
-    fetch(scriptURL, {
-      method: "POST",
-      body: formData
-    })
-    .then(res => res.json()) // parse JSON response
-    .then(() => window.location.href="thankyou.html")
-    .catch(err => alert("Error: " + err.message));
+    fetch(scriptURL, { method: "POST", body: formData })
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "success") {
+          window.location.href = "thankyou.html";
+        } else {
+          alert("Oops! Something went wrong: " + (res.message || "Unknown error"));
+        }
+      })
+      .catch(err => alert("Error: " + err.message));
   }
 
   document.getElementById("orderFormThekua").addEventListener("submit", e => {
