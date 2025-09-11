@@ -102,21 +102,15 @@ function submitOrder(form){
   const formData = new FormData(form);
   formData.append("eventType","order");
 
+  // Show success and redirect immediately
+  alert("Order placed successfully!");
+  window.location.href = "thankyou.html";
+
+  // Send data to Google Sheet in background
   fetch(scriptURL, { method:"POST", body: formData })
     .then(res => res.json())
-    .then(data => {
-      console.log("Server response:", data);
-      if(data.status === "success"){
-        alert("Order placed successfully!");
-        window.location.href = "thankyou.html";
-      } else {
-        alert("Error: " + data.message);
-      }
-    })
-    .catch(err => {
-      console.error("Submission failed:", err);
-      alert("Submission failed. Try again!");
-    });
+    .then(data => console.log("Server response:", data))
+    .catch(err => console.error("Submission failed:", err));
 }
 
 document.getElementById("orderFormThekua").addEventListener("submit", e => {
