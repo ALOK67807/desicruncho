@@ -1,101 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Desi Cruncho</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-50 text-gray-800">
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; }
+    
+    header { display:flex; justify-content:flex-start; align-items:center; padding:15px 30px; background:#f8f8f8; }
+    header h1 { margin:0; font-size:28px; color:orange; }
+    .logo-circle { width:70px; height:70px; border-radius:50%; overflow:hidden; display:flex; justify-content:center; align-items:center; margin-right:15px; background:#fff; }
+    .logo-circle img { width:60px; height:60px; object-fit:cover; }
 
-  <!-- ✅ Hero Section -->
-  <header class="bg-white shadow-md">
-    <div class="container mx-auto flex justify-between items-center py-4 px-6">
-      <div class="flex items-center space-x-3">
-        <img src="logo.png" alt="Desi Cruncho Logo" class="w-12 h-12 rounded-full">
-        <h1 class="text-2xl font-bold text-orange-500">Desi Cruncho</h1>
-      </div>
-      <nav class="space-x-6">
-        <a href="#products" class="hover:text-orange-500">Products</a>
-        <a href="#order" class="hover:text-orange-500">Order</a>
-        <a href="#testimonials" class="hover:text-orange-500">Testimonials</a>
-        <a href="#contact" class="hover:text-orange-500">Contact</a>
-      </nav>
+    .hero { background:url("https://github.com/ALOK67807/desicruncho/blob/main/hero-bg.jpg?raw=true") no-repeat center/cover; height:300px; display:flex; flex-direction:column; justify-content:center; align-items:center; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.7); }
+    .hero h2 { font-size:36px; margin:10px 0; font-weight:bold; }
+    .hero p { font-size:20px; }
+
+    .products { padding:40px 20px; text-align:center; }
+    .products h2 { font-size:28px; margin-bottom:20px; }
+    .product { display:inline-block; border:1px solid #ddd; border-radius:8px; margin:10px; width:250px; background:#fafafa; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition:all 0.3s ease-in-out; vertical-align: top; }
+    .product img { width:100%; border-radius:8px 8px 0 0; }
+    .product h3 { margin:10px 0; }
+    .product p { margin:5px 0; }
+
+    .order-form { display:none; margin-top:15px; text-align:left; padding:15px; background:#fff; border-radius:8px; border:1px solid #ddd; }
+    .order-form input, .order-form textarea { width:100%; margin-bottom:10px; padding:10px; border:1px solid #ccc; border-radius:5px; }
+    .order-form button { padding:10px 20px; background:#f39c12; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+    .order-form button:hover { background:#e67e22; }
+    .product.selected { box-shadow: 0 0 20px 5px gold; border: 2px solid gold; transform: scale(1.03); }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo-circle">
+      <img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo">
     </div>
+    <h1>Desi Cruncho</h1>
   </header>
 
-  <!-- ✅ Hero Banner -->
-  <section class="bg-orange-100 py-16 text-center">
-    <h2 class="text-4xl font-bold text-orange-600">Taste the Tradition with Desi Cruncho</h2>
-    <p class="mt-4 text-lg">Crispy Nimki & Sweet Thekua, made with love ❤️</p>
-    <a href="#order" class="mt-6 inline-block bg-orange-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-orange-600">Order Now</a>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Welcome to Desi Cruncho</h2>
+    <p>Crunchy, sweet, and full of traditional taste! 🍪</p>
   </section>
 
-  <!-- ✅ Product Section -->
-  <section id="products" class="container mx-auto py-16 px-6">
-    <h2 class="text-3xl font-bold text-center mb-10">Our Products</h2>
-    <div class="grid md:grid-cols-2 gap-8">
-      <!-- Thekua -->
-      <div class="bg-white shadow-md rounded-2xl p-6 text-center">
-        <img src="thekua.jpg" alt="Thekua" class="w-40 mx-auto rounded-lg mb-4">
-        <h3 class="text-xl font-semibold">Thekua</h3>
-        <p class="text-gray-600 mt-2">Traditional sweet snack, crispy & delightful.</p>
-        <button data-product="Thekua" class="product-button mt-4 bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-600">Order Thekua</button>
-      </div>
-      <!-- Nimki -->
-      <div class="bg-white shadow-md rounded-2xl p-6 text-center">
-        <img src="nimki.jpg" alt="Nimki" class="w-40 mx-auto rounded-lg mb-4">
-        <h3 class="text-xl font-semibold">Nimki</h3>
-        <p class="text-gray-600 mt-2">Crunchy salted snack for every occasion.</p>
-        <button data-product="Nimki" class="product-button mt-4 bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-600">Order Nimki</button>
-      </div>
-    </div>
-  </section>
+  <!-- Products Section -->
+  <section class="products">
+    <h2>Our Products</h2>
 
-  <!-- ✅ Order Section -->
-  <section id="order" class="bg-orange-50 py-16 px-6">
-    <h2 class="text-3xl font-bold text-center mb-10">Place Your Order</h2>
-    <div class="max-w-xl mx-auto bg-white p-6 shadow-md rounded-xl">
-      <form>
-        <input type="text" placeholder="Your Name" class="w-full mb-4 border rounded-lg p-3" required>
-        <input type="text" placeholder="Phone Number" class="w-full mb-4 border rounded-lg p-3" required>
-        <textarea placeholder="Delivery Address" class="w-full mb-4 border rounded-lg p-3" required></textarea>
-        <button type="submit" class="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600">Submit Order</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- ✅ Testimonials -->
-  <section id="testimonials" class="container mx-auto py-16 px-6 text-center">
-    <h2 class="text-3xl font-bold mb-10">What Our Customers Say</h2>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-white p-6 rounded-2xl shadow-md">
-        <p class="italic">“Thekua from Desi Cruncho reminded me of home. Simply delicious!”</p>
-        <h4 class="mt-4 font-semibold">- Priya</h4>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow-md">
-        <p class="italic">“Loved the Nimki! Perfectly crunchy and fresh.”</p>
-        <h4 class="mt-4 font-semibold">- Ramesh</h4>
+    <div class="product">
+      <img src="https://github.com/ALOK67807/desicruncho/blob/main/thekua.jpg?raw=true" alt="Thekua">
+      <h3>Thekua</h3>
+      <p>800 gm - ₹280</p>
+      <button class="product-button" data-product="Thekua" onclick="showForm('Thekua')">Order Now</button>
+      <div class="order-form" id="form-Thekua">
+        <form id="orderFormThekua">
+          <input type="hidden" name="Product" value="Thekua">
+          <input type="text" name="Name" placeholder="Your Name" required>
+          <input type="tel" name="Phone" placeholder="Phone Number" required>
+          <textarea name="Address" placeholder="Delivery Address" required></textarea>
+          <button type="submit">Place Order</button>
+        </form>
       </div>
     </div>
+
+    <div class="product">
+      <img src="https://github.com/ALOK67807/desicruncho/blob/main/nimki.jpg?raw=true" alt="Nimki">
+      <h3>Nimki</h3>
+      <p>800 gm - ₹300</p>
+      <button class="product-button" data-product="Nimki" onclick="showForm('Nimki')">Order Now</button>
+      <div class="order-form" id="form-Nimki">
+        <form id="orderFormNimki">
+          <input type="hidden" name="Product" value="Nimki">
+          <input type="text" name="Name" placeholder="Your Name" required>
+          <input type="tel" name="Phone" placeholder="Phone Number" required>
+          <textarea name="Address" placeholder="Delivery Address" required></textarea>
+          <button type="submit">Place Order</button>
+        </form>
+      </div>
+    </div>
+
   </section>
 
-  <!-- ✅ Contact Section -->
-  <section id="contact" class="bg-gray-100 py-16 px-6 text-center">
-    <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
-    <p>📍 Navi Mumbai, Maharashtra</p>
-    <p>📞 +91 9876543210</p>
-    <p>✉️ contact@desicruncho.com</p>
-  </section>
-
-  <!-- ✅ Footer -->
-  <footer class="bg-white py-6 text-center shadow-inner">
-    <p class="text-gray-600">© 2025 Desi Cruncho. All rights reserved.</p>
-  </footer>
-
-  <!-- ✅ Logging Script -->
+  <!-- Scripts -->
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwfPsgNMHkPGIOpDcqM3NsNWgNxH66lMtxx4haQRuEO9u-_rQyVfCeSBsyasasB2EsU/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzstZTgmSvIckl6DrKwlSFJLChXXfrjjJwYAxkZIYg81Ujxh-OJeQG8naABgW0bN-yy/exec";
+
+    function showForm(product) {
+      document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
+      document.querySelectorAll(".product").forEach(p => p.classList.remove("selected"));
+      document.getElementById("form-" + product).style.display = "block";
+      document.getElementById("form-" + product).parentElement.classList.add("selected");
+    }
+
+    function submitOrder(form, product) {
+      const formData = new FormData(form);
+
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify({
+          eventType: "Order",
+          product: product,
+          pageUrl: window.location.href,
+          referrer: document.referrer
+        }),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.status === "success") {
+          window.location.href = "thankyou.html";
+        } else {
+          alert("Error: " + data.message);
+        }
+      })
+      .catch(err => alert("Submission failed. Try again!"));
+    }
+
+    document.getElementById("orderFormThekua").addEventListener("submit", e => {
+      e.preventDefault();
+      submitOrder(e.target, "Thekua");
+    });
+
+    document.getElementById("orderFormNimki").addEventListener("submit", e => {
+      e.preventDefault();
+      submitOrder(e.target, "Nimki");
+    });
 
     // ✅ Page Visit log
     fetch(scriptURL, {
@@ -106,7 +137,7 @@
         referrer: document.referrer
       }),
       headers: { "Content-Type": "application/json" }
-    });
+    }).catch(err => console.error("PageView log failed", err));
 
     // ✅ Product button click log
     document.querySelectorAll(".product-button").forEach(btn => {
@@ -120,7 +151,7 @@
             referrer: document.referrer
           }),
           headers: { "Content-Type": "application/json" }
-        });
+        }).catch(err => console.error("ProductClick log failed", err));
       });
     });
   </script>
