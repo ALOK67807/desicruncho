@@ -83,11 +83,11 @@
 </section>
 
 <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbxt0XXJJbU6zfmVgTj0B3-M7Wg3rjFlGoUB2249sobuMJ8n_wkZKtd1t2Vv_QcTA31IVA/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbxq6J_nK9NZ78WUuLXSKZeKgvWURNo7loz2z0VV2_Ao5eHfe8Jc1lN_IdFYQogtfqDE5g/exec";
 
 // Log page visit automatically
 fetch(scriptURL + `?eventType=visit&product=&pageURL=${encodeURIComponent(window.location.href)}&referrer=${encodeURIComponent(document.referrer)}`)
-  .then(res => res.text())
+  .then(res => res.json())
   .then(data => console.log("Page visit logged:", data))
   .catch(err => console.error("Page visit logging failed:", err));
 
