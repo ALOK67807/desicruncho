@@ -32,7 +32,7 @@
   </style>
 </head>
 <body>
-  <!-- Updated Header -->
+  <!-- Header -->
   <header>
     <div class="logo-circle">
       <img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo">
@@ -40,11 +40,13 @@
     <h1>Desi Cruncho</h1>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
     <h2>Welcome to Desi Cruncho</h2>
     <p>Crunchy, sweet, and full of traditional taste! 🍪</p>
   </section>
 
+  <!-- Products -->
   <section class="products">
     <h2>Our Products</h2>
 
@@ -83,11 +85,11 @@
   </section>
 
   <script>
-    // ✅ Orders Sheet (replace with your Orders Web App URL)
+    // ✅ Orders Sheet (Web App URL for Orders)
     const scriptURL = "https://script.google.com/macros/s/AKfycbxAhLF48lZGkd1rx1XygHGywvQU9mCXseLoWRJT8-Dcqun-yvGcvGTnmI3EWIY-r-M9Tg/exec";
 
-    // ✅ Click Logs Sheet
-    const logURL = "https://script.google.com/macros/s/AKfycbyuOn4DXUgRZ9pexHzRew28rend42w9ZAU5fbyIG5P3KWAmGcX9S18Y0BU1QBIWltAG/exec";
+    // ✅ Logs Sheet (Web App URL for Click Logs)
+    const logURL = "https://script.google.com/macros/s/AKfycbyPvPkHPNgrD98Bo3P0HQeYrqXKv7JY2-iMghBiEQH75zMdOB5raucsNEUQJz3LaEyR/exec";
 
     function showForm(product) {
       document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
@@ -121,7 +123,7 @@
       submitOrder(e.target);
     });
 
-    // ✅ Logging function (FormData method - no CORS error)
+    // ✅ Logging function (FormData - CORS safe)
     function logEvent(eventType, product = "") {
       const formData = new FormData();
       formData.append("eventType", eventType);
@@ -133,12 +135,12 @@
         .catch(err => console.error("Logging failed", err));
     }
 
-    // Page Visit track
+    // Track page visit
     window.addEventListener("load", () => {
       logEvent("Page Visit");
     });
 
-    // Order button clicks track
+    // Track order button clicks
     document.querySelectorAll(".product button").forEach(btn => {
       btn.addEventListener("click", () => {
         let product = btn.closest(".product")?.querySelector("h3")?.innerText || "";
