@@ -7,7 +7,6 @@
   <style>
     body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; }
     
-    /* Header styles */
     header { display:flex; justify-content:flex-start; align-items:center; padding:15px 30px; background:#f8f8f8; }
     header h1 { margin:0; font-size:28px; color:orange; }
     .logo-circle { width:70px; height:70px; border-radius:50%; overflow:hidden; display:flex; justify-content:center; align-items:center; margin-right:15px; background:#fff; }
@@ -32,7 +31,6 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
     <div class="logo-circle">
       <img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo">
@@ -40,13 +38,11 @@
     <h1>Desi Cruncho</h1>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero">
     <h2>Welcome to Desi Cruncho</h2>
     <p>Crunchy, sweet, and full of traditional taste! 🍪</p>
   </section>
 
-  <!-- Products -->
   <section class="products">
     <h2>Our Products</h2>
 
@@ -85,32 +81,56 @@
   </section>
 
   <script>
-    // ✅ Orders Sheet (Web App URL for Orders)
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxAhLF48lZGkd1rx1XygHGywvQU9mCXseLoWRJT8-Dcqun-yvGcvGTnmI3EWIY-r-M9Tg/exec";
-
-    // ✅ Logs Sheet (Web App URL for Click Logs)
-    const logURL = "https://script.google.com/macros/s/AKfycbx0f7SgIGlrl8Ky23NGtjzT_0_cFVHbSiRnzvJdTVyCPYFuHb-lStj9yeGdvV9iYzAq/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzAVl9L0MagPTjdQzOPdACvNQWZ9xHQxyk0a-j8UmHqZc92nfKKH4rUVwRMgTe7UAVS/exec";
 
     function showForm(product) {
       document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
       document.querySelectorAll(".product").forEach(p => p.classList.remove("selected"));
       document.getElementById("form-" + product).style.display = "block";
       document.getElementById("form-" + product).parentElement.classList.add("selected");
+
+      // Log the click automatically
+      logClick(product);
     }
 
-    function submitOrder(form) {
-      const formData = new FormData(form);
+    async function logClick(product) {
+      const logData = {
+        eventType: "Click",
+        product: product,
+        pageUrl: window.location.href,
+        reffers: document.referrer
+      };
 
-      fetch(scriptURL, { method: "POST", body: formData })
-        .then(res => res.json())
-        .then(data => {
-          if(data.status === "success") {
-            window.location.href = "thankyou.html";
-          } else {
-            alert("Error: " + data.message);
-          }
-        })
-        .catch(err => alert("Submission failed. Try again!"));
+      try {
+        await fetch(scriptURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(logData)
+        });
+      } catch(err) {
+        console.error("Click logging failed:", err);
+      }
+    }
+
+    async function submitOrder(form) {
+      const formData = Object.fromEntries(new FormData(form).entries());
+      try {
+        const res = await fetch(scriptURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await res.json();
+        if (data.status === "success") {
+          window.location.href = "thankyou.html";
+        } else {
+          alert("Error: " + data.message);
+        }
+      } catch (err) {
+        alert("Submission failed. Try again!");
+        console.error(err);
+      }
     }
 
     document.getElementById("orderFormThekua").addEventListener("submit", e => {
@@ -121,31 +141,6 @@
     document.getElementById("orderFormNimki").addEventListener("submit", e => {
       e.preventDefault();
       submitOrder(e.target);
-    });
-
-    // ✅ Logging function (FormData - CORS safe)
-    function logEvent(eventType, product = "") {
-      const formData = new FormData();
-      formData.append("eventType", eventType);
-      formData.append("product", product);
-      formData.append("pageUrl", window.location.href);
-      formData.append("referrer", document.referrer || "Direct / Unknown");
-
-      fetch(logURL, { method: "POST", body: formData })
-        .catch(err => console.error("Logging failed", err));
-    }
-
-    // Track page visit
-    window.addEventListener("load", () => {
-      logEvent("Page Visit");
-    });
-
-    // Track order button clicks
-    document.querySelectorAll(".product button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        let product = btn.closest(".product")?.querySelector("h3")?.innerText || "";
-        logEvent("Order Click", product);
-      });
     });
   </script>
 </body>
