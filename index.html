@@ -7,6 +7,7 @@
   <style>
     body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; }
     
+    /* Header styles */
     header { display:flex; justify-content:flex-start; align-items:center; padding:15px 30px; background:#f8f8f8; }
     header h1 { margin:0; font-size:28px; color:orange; }
     .logo-circle { width:70px; height:70px; border-radius:50%; overflow:hidden; display:flex; justify-content:center; align-items:center; margin-right:15px; background:#fff; }
@@ -53,7 +54,7 @@
       <button onclick="showForm('Thekua')">Order Now</button>
       <div class="order-form" id="form-Thekua">
         <form id="orderFormThekua">
-          <input type="hidden" name="Product" value="Thekua">
+          <input type="hidden" name="product" value="Thekua">
           <input type="text" name="Name" placeholder="Your Name" required>
           <input type="tel" name="Phone" placeholder="Phone Number" required>
           <textarea name="Address" placeholder="Delivery Address" required></textarea>
@@ -69,7 +70,7 @@
       <button onclick="showForm('Nimki')">Order Now</button>
       <div class="order-form" id="form-Nimki">
         <form id="orderFormNimki">
-          <input type="hidden" name="Product" value="Nimki">
+          <input type="hidden" name="product" value="Nimki">
           <input type="text" name="Name" placeholder="Your Name" required>
           <input type="tel" name="Phone" placeholder="Phone Number" required>
           <textarea name="Address" placeholder="Delivery Address" required></textarea>
@@ -81,56 +82,37 @@
   </section>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbXFu8Enz0zk893clt9z9VWajKzSNbIqalkCNKTZbLQZi_ksQ0P7GLTPb2h2bR2so6U/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzXFu8Enz0zk893clt9z9VWajKzSNbIqalkCNKTZbLQZi_ksQ0P7GLTPb2h2bR2so6U/exec";
 
     function showForm(product) {
       document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
       document.querySelectorAll(".product").forEach(p => p.classList.remove("selected"));
       document.getElementById("form-" + product).style.display = "block";
       document.getElementById("form-" + product).parentElement.classList.add("selected");
-
-      // Log click automatically
-      logClick(product);
     }
 
-    async function logClick(product) {
-      const logData = {
-        eventType: "Click",
-        product: product,
+    function submitOrder(form) {
+      const formData = {
+        eventType: "Order",
+        product: form.querySelector("input[name='product']").value,
+        Name: form.querySelector("input[name='Name']").value,
+        Phone: form.querySelector("input[name='Phone']").value,
+        Address: form.querySelector("textarea[name='Address']").value,
         pageUrl: window.location.href,
         referrer: document.referrer
       };
 
-      try {
-        await fetch(scriptURL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(logData)
-        });
-      } catch(err) {
-        console.error("Click logging failed:", err);
-      }
-    }
+      fetch(scriptURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "no-cors",
+        body: JSON.stringify(formData)
+      });
 
-    async function submitOrder(form) {
-      const formData = Object.fromEntries(new FormData(form).entries());
-      try {
-        const res = await fetch(scriptURL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData)
-        });
-
-        const data = await res.json();
-        if (data.status === "success") {
-          window.location.href = "thankyou.html";
-        } else {
-          alert("Error: " + data.message);
-        }
-      } catch (err) {
-        alert("Submission failed. Try again!");
-        console.error(err);
-      }
+      alert("Order submitted! We will contact you soon.");
+      form.reset();
+      document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
+      document.querySelectorAll(".product").forEach(p => p.classList.remove("selected"));
     }
 
     document.getElementById("orderFormThekua").addEventListener("submit", e => {
