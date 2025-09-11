@@ -81,7 +81,7 @@
   </section>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzAVl9L0MagPTjdQzOPdACvNQWZ9xHQxyk0a-j8UmHqZc92nfKKH4rUVwRMgTe7UAVS/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbXFu8Enz0zk893clt9z9VWajKzSNbIqalkCNKTZbLQZi_ksQ0P7GLTPb2h2bR2so6U/exec";
 
     function showForm(product) {
       document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
@@ -89,7 +89,7 @@
       document.getElementById("form-" + product).style.display = "block";
       document.getElementById("form-" + product).parentElement.classList.add("selected");
 
-      // Log the click automatically
+      // Log click automatically
       logClick(product);
     }
 
@@ -98,7 +98,7 @@
         eventType: "Click",
         product: product,
         pageUrl: window.location.href,
-        reffers: document.referrer
+        referrer: document.referrer
       };
 
       try {
