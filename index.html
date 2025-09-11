@@ -6,23 +6,19 @@
   <title>Desi Cruncho</title>
   <style>
     body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; }
-    
     header { display:flex; justify-content:flex-start; align-items:center; padding:15px 30px; background:#f8f8f8; }
     header h1 { margin:0; font-size:28px; color:orange; }
     .logo-circle { width:70px; height:70px; border-radius:50%; overflow:hidden; display:flex; justify-content:center; align-items:center; margin-right:15px; background:#fff; }
     .logo-circle img { width:60px; height:60px; object-fit:cover; }
-
     .hero { background:url("https://github.com/ALOK67807/desicruncho/blob/main/hero-bg.jpg?raw=true") no-repeat center/cover; height:300px; display:flex; flex-direction:column; justify-content:center; align-items:center; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.7); }
     .hero h2 { font-size:36px; margin:10px 0; font-weight:bold; }
     .hero p { font-size:20px; }
-
     .products { padding:40px 20px; text-align:center; }
     .products h2 { font-size:28px; margin-bottom:20px; }
     .product { display:inline-block; border:1px solid #ddd; border-radius:8px; margin:10px; width:250px; background:#fafafa; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition:all 0.3s ease-in-out; vertical-align: top; }
     .product img { width:100%; border-radius:8px 8px 0 0; }
     .product h3 { margin:10px 0; }
     .product p { margin:5px 0; }
-
     .order-form { display:none; margin-top:15px; text-align:left; padding:15px; background:#fff; border-radius:8px; border:1px solid #ddd; }
     .order-form input, .order-form textarea { width:100%; margin-bottom:10px; padding:10px; border:1px solid #ccc; border-radius:5px; }
     .order-form button { padding:10px 20px; background:#f39c12; color:#fff; border:none; border-radius:5px; cursor:pointer; }
@@ -53,7 +49,7 @@
       <button onclick="showForm('Thekua')">Order Now</button>
       <div class="order-form" id="form-Thekua">
         <form id="orderFormThekua">
-          <input type="hidden" name="product" value="Thekua">
+          <input type="hidden" name="Product" value="Thekua">
           <input type="text" name="Name" placeholder="Your Name" required>
           <input type="tel" name="Phone" placeholder="Phone Number" required>
           <textarea name="Address" placeholder="Delivery Address" required></textarea>
@@ -69,7 +65,7 @@
       <button onclick="showForm('Nimki')">Order Now</button>
       <div class="order-form" id="form-Nimki">
         <form id="orderFormNimki">
-          <input type="hidden" name="product" value="Nimki">
+          <input type="hidden" name="Product" value="Nimki">
           <input type="text" name="Name" placeholder="Your Name" required>
           <input type="tel" name="Phone" placeholder="Phone Number" required>
           <textarea name="Address" placeholder="Delivery Address" required></textarea>
@@ -77,11 +73,10 @@
         </form>
       </div>
     </div>
-
   </section>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbx0JJ6L3IlapRXYstVwGOA8NXVj3gPAOpKvkjWi_PKELuO8c2PukbQlqS9FvTDjL_RE/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxU-oMK-2YNCtWdbiPCcVkREazKo_Q9krDIm4FdxJ1kZGPWgCXfZNik25RTgDD1tS86/exec";
 
     function showForm(product) {
       document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
@@ -92,24 +87,27 @@
 
     function submitOrder(form) {
       const formData = new FormData(form);
-      formData.append("eventType", "Order");
-      formData.append("pageUrl", window.location.href);
-      formData.append("referrer", document.referrer);
+      const jsonData = {};
+      formData.forEach((value, key) => jsonData[key] = value);
+      jsonData.eventType = "Order";
+      jsonData.pageUrl = window.location.href;
+      jsonData.referrer = document.referrer;
 
-      fetch(scriptURL, { method: "POST", body: formData })
-        .then(response => response.json())
-        .then(data => {
-          if(data.status === "success") {
-            alert("Order submitted successfully!");
-            form.reset();
-          } else {
-            alert("Error: " + data.message);
-          }
-        })
-        .catch(err => {
-          alert("Submission failed! Try again.");
-          console.error(err);
-        });
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(jsonData),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.status === "success") {
+          alert("Order placed successfully!");
+          form.reset();
+        } else {
+          alert("Error: " + data.message);
+        }
+      })
+      .catch(err => alert("Submission failed. Try again!"));
     }
 
     document.getElementById("orderFormThekua").addEventListener("submit", e => {
