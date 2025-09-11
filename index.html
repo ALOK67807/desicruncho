@@ -49,7 +49,7 @@
       <button onclick="showForm('Thekua')">Order Now</button>
       <div class="order-form" id="form-Thekua">
         <form id="orderFormThekua">
-          <input type="hidden" name="Product" value="Thekua">
+          <input type="hidden" name="product" value="Thekua">
           <input type="text" name="Name" placeholder="Your Name" required>
           <input type="tel" name="Phone" placeholder="Phone Number" required>
           <textarea name="Address" placeholder="Delivery Address" required></textarea>
@@ -65,7 +65,7 @@
       <button onclick="showForm('Nimki')">Order Now</button>
       <div class="order-form" id="form-Nimki">
         <form id="orderFormNimki">
-          <input type="hidden" name="Product" value="Nimki">
+          <input type="hidden" name="product" value="Nimki">
           <input type="text" name="Name" placeholder="Your Name" required>
           <input type="tel" name="Phone" placeholder="Phone Number" required>
           <textarea name="Address" placeholder="Delivery Address" required></textarea>
@@ -76,7 +76,7 @@
   </section>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxU-oMK-2YNCtWdbiPCcVkREazKo_Q9krDIm4FdxJ1kZGPWgCXfZNik25RTgDD1tS86/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyJTs5Yw_MVvNvEuITBWV7B1tOezTowoiVcxosNagv8hXayHNG4Q5xHNoDVvTLdAY0A/exec";
 
     function showForm(product) {
       document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
@@ -121,4 +121,4 @@
     });
   </script>
 </body>
-</html>  
+</html>
