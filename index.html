@@ -52,7 +52,7 @@
       <img src="https://github.com/ALOK67807/desicruncho/blob/main/thekua.jpg?raw=true" alt="Thekua">
       <h3>Thekua</h3>
       <p>800 gm - ₹280</p>
-      <button onclick="showForm('Thekua')">Order Now</button>
+      <button onclick="logClick('Thekua')">Order Now</button>
       <div class="order-form" id="form-Thekua">
         <form id="orderFormThekua">
           <input type="hidden" name="Product" value="Thekua">
@@ -68,7 +68,7 @@
       <img src="https://github.com/ALOK67807/desicruncho/blob/main/nimki.jpg?raw=true" alt="Nimki">
       <h3>Nimki</h3>
       <p>800 gm - ₹300</p>
-      <button onclick="showForm('Nimki')">Order Now</button>
+      <button onclick="logClick('Nimki')">Order Now</button>
       <div class="order-form" id="form-Nimki">
         <form id="orderFormNimki">
           <input type="hidden" name="Product" value="Nimki">
@@ -83,15 +83,45 @@
   </section>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxAhLF48lZGkd1rx1XygHGywvQU9mCXseLoWRJT8-Dcqun-yvGcvGTnmI3EWIY-r-M9Tg/exec";
+    // ✅ Web App URL (aapne diya hua)
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyOJo6ITIMO7cUm6ndXjMSftnVa9F1kEkWbS2Em0KL4DowBhhKV0_rVubxyPI_j4IDc/exec";
 
-    function showForm(product) {
+    // ✅ PAGE VISIT LOG
+    window.addEventListener("load", () => {
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify({
+          eventType: "PageView",
+          product: "",
+          pageUrl: window.location.href,
+          referrer: document.referrer
+        }),
+        headers: { "Content-Type": "application/json" }
+      });
+    });
+
+    // ✅ PRODUCT BUTTON CLICK LOG
+    function logClick(product) {
+      // send log
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify({
+          eventType: "ProductClick",
+          product: product,
+          pageUrl: window.location.href,
+          referrer: document.referrer
+        }),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      // show order form
       document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
       document.querySelectorAll(".product").forEach(p => p.classList.remove("selected"));
       document.getElementById("form-" + product).style.display = "block";
       document.getElementById("form-" + product).parentElement.classList.add("selected");
     }
 
+    // ✅ ORDER SUBMISSION (form save)
     function submitOrder(form) {
       const formData = new FormData(form);
 
