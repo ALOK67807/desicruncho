@@ -7,7 +7,6 @@
   <style>
     body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; }
     
-    /* Header styles */
     header { display:flex; justify-content:flex-start; align-items:center; padding:15px 30px; background:#f8f8f8; }
     header h1 { margin:0; font-size:28px; color:orange; }
     .logo-circle { width:70px; height:70px; border-radius:50%; overflow:hidden; display:flex; justify-content:center; align-items:center; margin-right:15px; background:#fff; }
@@ -32,7 +31,6 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
     <div class="logo-circle">
       <img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo">
@@ -83,7 +81,7 @@
   </section>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxG9lkewyG9nNQZzIItiHgu2FxA1hqA4tiXRLBs5R1n77YT-ig0K_0SnExVsD_dRXdz/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbx0JJ6L3IlapRXYstVwGOA8NXVj3gPAOpKvkjWi_PKELuO8c2PukbQlqS9FvTDjL_RE/exec";
 
     function showForm(product) {
       document.querySelectorAll(".order-form").forEach(f => f.style.display = "none");
@@ -99,8 +97,19 @@
       formData.append("referrer", document.referrer);
 
       fetch(scriptURL, { method: "POST", body: formData })
-        .then(() => alert("Order submitted!"))
-        .catch(() => alert("Submission failed!"));
+        .then(response => response.json())
+        .then(data => {
+          if(data.status === "success") {
+            alert("Order submitted successfully!");
+            form.reset();
+          } else {
+            alert("Error: " + data.message);
+          }
+        })
+        .catch(err => {
+          alert("Submission failed! Try again.");
+          console.error(err);
+        });
     }
 
     document.getElementById("orderFormThekua").addEventListener("submit", e => {
