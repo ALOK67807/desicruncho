@@ -7,6 +7,7 @@
   <style>
     body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; }
     
+    /* Updated header styles */
     header { display:flex; justify-content:flex-start; align-items:center; padding:15px 30px; background:#f8f8f8; }
     header h1 { margin:0; font-size:28px; color:orange; }
     .logo-circle { width:70px; height:70px; border-radius:50%; overflow:hidden; display:flex; justify-content:center; align-items:center; margin-right:15px; background:#fff; }
@@ -31,7 +32,7 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
+  <!-- Updated Header -->
   <header>
     <div class="logo-circle">
       <img src="https://github.com/ALOK67807/desicruncho/blob/main/logo.png?raw=true" alt="Logo">
@@ -39,13 +40,11 @@
     <h1>Desi Cruncho</h1>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero">
     <h2>Welcome to Desi Cruncho</h2>
     <p>Crunchy, sweet, and full of traditional taste! 🍪</p>
   </section>
 
-  <!-- Products Section -->
   <section class="products">
     <h2>Our Products</h2>
 
@@ -83,7 +82,6 @@
 
   </section>
 
-  <!-- Scripts -->
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbzstZTgmSvIckl6DrKwlSFJLChXXfrjjJwYAxkZIYg81Ujxh-OJeQG8naABgW0bN-yy/exec";
 
@@ -94,41 +92,32 @@
       document.getElementById("form-" + product).parentElement.classList.add("selected");
     }
 
-    function submitOrder(form, product) {
+    function submitOrder(form) {
       const formData = new FormData(form);
 
-      fetch(scriptURL, {
-        method: "POST",
-        body: JSON.stringify({
-          eventType: "Order",
-          product: product,
-          pageUrl: window.location.href,
-          referrer: document.referrer
-        }),
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(res => res.json())
-      .then(data => {
-        if(data.status === "success") {
-          window.location.href = "thankyou.html";
-        } else {
-          alert("Error: " + data.message);
-        }
-      })
-      .catch(err => alert("Submission failed. Try again!"));
+      fetch(scriptURL, { method: "POST", body: formData })
+        .then(res => res.json())
+        .then(data => {
+          if(data.status === "success") {
+            window.location.href = "thankyou.html";
+          } else {
+            alert("Error: " + data.message);
+          }
+        })
+        .catch(err => alert("Submission failed. Try again!"));
     }
 
     document.getElementById("orderFormThekua").addEventListener("submit", e => {
       e.preventDefault();
-      submitOrder(e.target, "Thekua");
+      submitOrder(e.target);
     });
 
     document.getElementById("orderFormNimki").addEventListener("submit", e => {
       e.preventDefault();
-      submitOrder(e.target, "Nimki");
+      submitOrder(e.target);
     });
 
-    // ✅ Page Visit log
+    // ✅ Event Logging
     fetch(scriptURL, {
       method: "POST",
       body: JSON.stringify({
@@ -137,9 +126,8 @@
         referrer: document.referrer
       }),
       headers: { "Content-Type": "application/json" }
-    }).catch(err => console.error("PageView log failed", err));
+    });
 
-    // ✅ Product button click log
     document.querySelectorAll(".product-button").forEach(btn => {
       btn.addEventListener("click", () => {
         fetch(scriptURL, {
@@ -147,11 +135,10 @@
           body: JSON.stringify({
             eventType: "ProductClick",
             product: btn.getAttribute("data-product"),
-            pageUrl: window.location.href,
-            referrer: document.referrer
+            pageUrl: window.location.href
           }),
           headers: { "Content-Type": "application/json" }
-        }).catch(err => console.error("ProductClick log failed", err));
+        });
       });
     });
   </script>
